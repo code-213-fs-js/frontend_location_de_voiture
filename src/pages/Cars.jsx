@@ -36,7 +36,7 @@ export default function Cars() {
         </label>
       </div>
       <div className="car-grid">
-        {availableCars.map((car) => (
+        {showcars.map((car) => (
           <CarCard key={car._id} car={car} />
         ))}
       </div>
