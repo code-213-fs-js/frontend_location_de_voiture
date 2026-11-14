@@ -1,9 +1,19 @@
 import PageTitle from "../components/PageTitle";
 import CarCard from "../components/CarCard";
 import { cars, categories } from "../data";
+import { useEffect, useState } from "react";
 
 export default function Cars() {
-  const availableCars = cars.filter((car) => car.status === "available");
+  const [cars,setCars]=useState([])
+  const [categories,setCategories]=useState([])
+  const [categoryId,setCategoryId]=useState([])
+  useEffect(()=>{
+    api.get("/cars/available").then((res)=>setCars(res.data))
+    api.get("/categories").then((res)=>setCategories(res.data))
+  },[])
+
+  const showcars = categoryId ? cars.filter((car)=>
+  car.category_id?._id === categoryId):cars
 
   return (
     <>
@@ -14,7 +24,8 @@ export default function Cars() {
       <div className="filters">
         <label>
           Catégorie
-          <select defaultValue="">
+          <select defaultValue="" value={categoryId}
+            onChange={(e)=>setCategoryId(e.target.value)}>
             <option value="">Toutes les catégories</option>
             {categories.map((category) => (
               <option key={category._id} value={category._id}>

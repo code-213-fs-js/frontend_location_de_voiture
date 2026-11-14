@@ -12,6 +12,7 @@ import ManageCategories from "./pages/ManageCategories";
 import ManageCustomers from "./pages/ManageCustomers";
 import ManageRentals from "./pages/ManageRentals";
 import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
@@ -24,8 +25,12 @@ export default function App() {
           <Route path="/cars/:id" element={<CarDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/my-rentals" element={<CustomerRentals />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/my-rentals" element={<ProtectedRoute role="customer">
+          <CustomerRentals/> </ProtectedRoute>} />
+          <Route path="/admin"
+            element={<ProtectedRoute role='admin'>
+              <AdminDashboard/>
+            </ProtectedRoute>}/>
           <Route path="/admin/cars" element={<ManageCars />} />
           <Route path="/admin/categories" element={<ManageCategories />} />
           <Route path="/admin/customers" element={<ManageCustomers />} />
