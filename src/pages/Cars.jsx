@@ -1,6 +1,6 @@
 import PageTitle from "../components/PageTitle";
 import CarCard from "../components/CarCard";
-import { cars, categories } from "../data";
+import api from "../api/api";
 import { useEffect, useState } from "react";
 
 export default function Cars() {
